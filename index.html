@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>재귀함수 반복</title>
+    <style>
+        #content {
+            white-space: pre-wrap;
+            font-size: 20px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        const text = `
+"재귀함수가 뭔가요?"
+
+"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.
+마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.
+그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어."
+`;
+
+        const contentElement = document.getElementById("content");
+        let index = 0;
+
+        function printTextOneByOne() {
+            if (index < text.length) {
+                contentElement.innerHTML += text[index];
+                index++;
+                window.scrollTo(0, document.body.scrollHeight);
+            } else {
+                contentElement.innerHTML += "\n\n";
+                index = 0;
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function handleScroll(event) {
+            const deltaY = event.deltaY;
+            if (deltaY > 0) {
+                printTextOneByOne();
+            }
+        }
+
+        document.addEventListener("wheel", handleScroll);
+
+        // 자동 출력 시작
+        setInterval(() => {
+            printTextOneByOne();
+        }, 50);
+    </script>
+</body>
+</html>
